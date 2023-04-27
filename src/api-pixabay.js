@@ -4,10 +4,10 @@ export default class PixabayService {
     constructor() {
         this.searchQuery = '';
         this.page = 1;
+        this.per_page = 40;
     }
 
     async getPhotos() {
-        console.log(this);
         try {
             const url = 'https://pixabay.com/api/';       
             const response = await axios.get(url, {
@@ -17,14 +17,12 @@ export default class PixabayService {
                     image_type: "photo",
                     orientation: "horizontal",
                     safesearch: true,
-                    per_page: 40,
+                    per_page: this.per_page,
                     page: this.page
                 }
             });
-            console.log(response.data.hits);
             this.incrementPage();
-            console.log(this);
-            return response.data.hits;
+            return response.data;
         } catch (error) {
             console.log(error);
         }
@@ -37,13 +35,13 @@ export default class PixabayService {
         this.page = 1;
     }
 
-    get query() {
-        return this.searchQuery;
-    }
+    // get query() {
+    //     return this.searchQuery;
+    // }
 
-    set query(newQuery) {
-        this.searchQuery = newQuery;
-    }
+    // set query(newQuery) {
+    //     this.searchQuery = newQuery;
+    // }
 
     // fetchPhotos() {
     //     console.log(this);
