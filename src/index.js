@@ -23,6 +23,8 @@ function onSearch(event) {
     pixabayService.resetPage();
     pixabayService.getPhotos().then(data => {
         if (data.totalHits === 0) {
+            clearGallery()
+            loadBtn.classList.add("hidden");
             Notify.failure("Sorry, there are no images matching your search query. Please try again.");
             return;
         } else {
